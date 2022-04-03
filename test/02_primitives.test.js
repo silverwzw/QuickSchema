@@ -16,6 +16,11 @@ describe("primitives", () => {
         assert(!Validate("true", BOOL));
         assert(!Validate(Boolean, BOOL));
         assert(!Validate(BOOL, BOOL));
+
+        assert(Validate(true, Boolean));
+        assert(Validate(false, Boolean));
+        assert(!Validate({}, Boolean));
+        assert(!Validate(Boolean, Boolean));
     });
     it("NUM", () => {
         assert(Validate(1,         NUM));
@@ -36,6 +41,9 @@ describe("primitives", () => {
         assert(!Validate("number", NUM));
         assert(!Validate(Number, NUM));
         assert(!Validate(NUM, NUM));
+
+        assert(Validate(1, Number));
+        assert(!Validate("", Number));
     });
     it("STR", () => {
         assert(Validate("",        STR));
@@ -50,6 +58,9 @@ describe("primitives", () => {
         assert(!Validate(1, STR));
         assert(!Validate(String, STR));
         assert(!Validate(STR, STR));
+
+        assert(Validate("", String));
+        assert(!Validate(null, String));
     });
     it("NULL", () => {
         assert(Validate(null, NULL));

@@ -37,7 +37,8 @@ function IsAdvancedSchema(schema) {
 }
 
 function IsPrimitiveSchema(schema) {
-    return schema instanceof PRIMITIVE_TYPE_BASE;
+    return schema instanceof PRIMITIVE_TYPE_BASE || schema === String ||
+           schema === Boolean || schema === Number;
 }
 
 function IsTypeSchema(schema) {

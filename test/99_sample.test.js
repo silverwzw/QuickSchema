@@ -2,17 +2,17 @@
 describe("code example in README", () => {
     it("Quick start", () => {
         const assert = require('assert');
-        const { Validate, STR, NUM, OPTIONAL, ONE_OF, IS } =
+        const { Validate, OPTIONAL, ONE_OF, IS } =
                 require("../quick_schema.js");
 
         // Schema definition for "Person"
         const PersonSchema = {
           name: {
-              first: STR,
-              last: STR,
-              middle: OPTIONAL(STR)
+              first: String,
+              last: String,
+              middle: OPTIONAL(String)
           },
-          age: NUM,                  // `age` must be a number
+          age: Number,               // `age` must be a number
           pronouns: ONE_OF(IS("he"), IS("she")),
                                      // `pronouns` must be either "he" or "she"
         };
@@ -28,32 +28,32 @@ describe("code example in README", () => {
     });
 
     const assert = require('assert');
-    const { Validate, STR, NUM, OPTIONAL, IS, DICT, NOT, ALL_OF, ONE_OF, ANY,
+    const { Validate, OPTIONAL, IS, DICT, NOT, ALL_OF, ONE_OF, ANY,
             EXISTS, STRINGIFIED } =
             require("../quick_schema.js");
 
     describe("Validators", () => {
         it("Primitive types", () => {
-            const { Validate, STR, NUM, BOOL, NULL, UNDEF } =
+            const { Validate, NULL, UNDEF } =
                         require("../quick_schema.js");
 
-            assert(Validate("string",  STR));
-            assert(Validate(true,      BOOL));
-            assert(Validate(0,         NUM));
+            assert(Validate("string",  String));
+            assert(Validate(true,      Boolean));
+            assert(Validate(0,         Number));
             assert(Validate(null,      NULL));
             assert(Validate(undefined, UNDEF));
         });
         it("Objects", () => {
             const ContactSchema = {
-                name: STR,
-                phone: { country_code: NUM, number: NUM },
+                name: String,
+                phone: { country_code: Number, number: Number },
                 address: {
-                    line_1: STR,
-                    line_2: OPTIONAL(STR),
-                    city: STR,
-                    state: STR,
-                    zip_code: NUM,
-                    country: STR
+                    line_1: String,
+                    line_2: OPTIONAL(String),
+                    city: String,
+                    state: String,
+                    zip_code: Number,
+                    country: String
                 }
             };
             assert(Validate({
@@ -70,14 +70,14 @@ describe("code example in README", () => {
             }, ContactSchema));
         });
         it("Array", () => {
-            const NumberArraySchema = [NUM];
+            const NumberArraySchema = [Number];
             let ok = Validate([1,1,2,3,5,8], NumberArraySchema);
             assert(ok);
             ok = Validate([1,"1",2,3,5,8], NumberArraySchema);
             assert(!ok);
         });
         it("Dictionary", () => {
-            const ImdbRatingSchema= DICT(NUM);
+            const ImdbRatingSchema= DICT(Number);
             assert(Validate({
                 "The Shawshank Redemption": 9.3,
                 "The Godfather": 9.2,
@@ -86,7 +86,7 @@ describe("code example in README", () => {
                 "Schindler's List": 9.0
             }, ImdbRatingSchema));
 
-            const ImdbRatingSchema2 = DICT({ dictionary_name: STR }, NUM);
+            const ImdbRatingSchema2 = DICT({ dictionary_name: String }, Number);
             assert(Validate({
                 "dictionary_name": "IMDB Score",
                 "The Shawshank Redemption": 9.3,
@@ -99,19 +99,19 @@ describe("code example in README", () => {
         describe("Logical Operators", () => {
             it("NOT", () => {
                 let ok;
-                ok = Validate("1", NOT(NUM));
+                ok = Validate("1", NOT(Number));
                 assert(ok);
-                ok = Validate(1, NOT(NUM));
+                ok = Validate(1, NOT(Number));
                 assert(!ok);
             });
             it("ALL_OF", () => {
                 const EmployeeSchema = {
-                    name: STR,
-                    title: STR
+                    name: String,
+                    title: String
                 };
                 const PersonSchema = {
-                    name: STR,
-                    age: NUM,
+                    name: String,
+                    age: Number,
                 };
                 assert(Validate({
                    name: "Steven",
@@ -121,11 +121,11 @@ describe("code example in README", () => {
             });
             it("ONE_OF", () => {
                 let ok;
-                ok = Validate(1, ONE_OF(NUM, STR));
+                ok = Validate(1, ONE_OF(Number, String));
                 assert(ok);
-                ok = Validate("", ONE_OF(NUM, STR));
+                ok = Validate("", ONE_OF(Number, String));
                 assert(ok);
-                ok = Validate(true, ALL_OF(NUM, STR));
+                ok = Validate(true, ALL_OF(Number, String));
                 assert(!ok);
             });
         });
@@ -162,14 +162,14 @@ describe("code example in README", () => {
                 assert(ok);
             });
             it("STRINGIFIED", () => {
-                assert(Validate("1", STRINGIFIED(NUM)));
+                assert(Validate("1", STRINGIFIED(Number)));
                 assert(Validate('{ "name": "Maggie" }',
-                                STRINGIFIED({ name: STR })));
+                                STRINGIFIED({ name: String })));
             });
             it("OPTIONAL", () => {
                 const Schema = {
-                    name: STR,
-                    salary: OPTIONAL(NUM)
+                    name: String,
+                    salary: OPTIONAL(Number)
                 };
                 assert(Validate({ name: "Summer" }, Schema));
                 assert(Validate({ name: "Summer", salary: 100 }, Schema));
@@ -182,9 +182,9 @@ describe("code example in README", () => {
             it("default", () => {
                 const Library = {
                     "Person": {
-                        name: STR,
+                        name: String,
                     },
-                    "Employee": ALL_OF("Person", { salary: NUM })
+                    "Employee": ALL_OF("Person", { salary: Number })
                 };
                 const employees = [ { name: "Alice", salary: 100 },
                                     { name: "Bob",   salary: 100 } ];
@@ -218,12 +218,12 @@ describe("code example in README", () => {
 
     it("Retrive error message", () => {
         const CompanySchema = {
-            name: STR,
+            name: String,
             employees: [
                 {
-                    name: STR,
-                    title: OPTIONAL(STR),
-                    id: NUM
+                    name: String,
+                    title: OPTIONAL(String),
+                    id: Number
                 }
             ],
         };

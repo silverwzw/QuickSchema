@@ -35,16 +35,16 @@ The minimal syntax to validate a specified `obj` against a specified `schema`:
 [Back](#table-of-content)
 ### Define a schema
 ```js
-const { Validate, STR, NUM, OPTIONAL, ONE_OF, IS } =
+const { Validate, OPTIONAL, ONE_OF, IS } =
         require("quick-schema");
 
 const PersonSchema = {
   name: {
-      first: STR,
-      last: STR,
-      middle: OPTIONAL(STR)
+      first: String,
+      last: String,
+      middle: OPTIONAL(String)
   },
-  age: NUM,
+  age: Number,
   pronouns: ONE_OF(IS("he"), IS("she"))
 };
 ```
@@ -67,12 +67,12 @@ assert(ok);    // Evaluates to true
 Sometimes we want to know why an object failed the validation, this is expecially useful when we have a complex object. The `Validate.WithReason(...)` function will return a concrete error message when the validation failed:
 ```js
 const CompanySchema = {
-    name: STR,
+    name: String,
     employees: [
         {
-            name: STR,
-            title: OPTIONAL(STR),
-            id: NUM
+            name: String,
+            title: OPTIONAL(String),
+            id: Number
         }
     ],
 };
@@ -93,12 +93,12 @@ console.log(message); // Prints: 'root.employees[1].id' is not a number."
 ## Built-in Validators
 ### Primitive types
 ```js
-const { Validate, STR, NUM, BOOL, NULL, UNDEF } =
+const { Validate, NULL, UNDEF } =
         require("quick-schema");
 
-assert(Validate("string",  STR));
-assert(Validate(true,      BOOL));
-assert(Validate(0,         NUM));
+assert(Validate("string",  String));
+assert(Validate(true,      Boolean));
+assert(Validate(0,         Number));
 assert(Validate(null,      NULL));
 assert(Validate(undefined, UNDEF));
 ```
@@ -106,19 +106,18 @@ assert(Validate(undefined, UNDEF));
 [Back](#table-of-content)
 ### Object
 ```js
-const { Validate, STR, NUM, OPTIONAL } =
-        require("quick-schema");
-        
+const { Validate, OPTIONAL } = require("quick-schema");
+
 const ContactSchema = {
-    name: STR,
-    phone: { country_code: NUM, number: NUM },
+    name: String,
+    phone: { country_code: Number, number: Number },
     address: {
-        line_1: STR,
-        line_2: OPTIONAL(STR),
-        city: STR,
-        state: STR,
-        zip_code: NUM,
-        country: STR
+        line_1: String,
+        line_2: OPTIONAL(String),
+        city: String,
+        state: String,
+        zip_code: Number,
+        country: String
     },
     note: ""     // extra property (i.e. properties not metioned in schema) is OK
 };
@@ -138,9 +137,8 @@ assert(Validate({
 [Back](#table-of-content)
 ### Array
 ```js
-const { Validate, NUM } =
-        require("quick-schema");
-const NumberArraySchema = [NUM];
+const { Validate } = require("quick-schema");
+const NumberArraySchema = [Number];
 let ok = Validate([1,1,2,3,5,8], NumberArraySchema);
 assert(ok);
 ok = Validate([1,"1",2,3,5,8], NumberArraySchema);
@@ -151,9 +149,8 @@ assert(!ok);
 ### Dictionary
 Use the `Dictionary` validator to validate a mapping (from string to another type):
 ```js
-const { Validate, NUM, STR, DICT } =
-        require("quick-schema");
-const ImdbRatingSchema= DICT(NUM);
+const { Validate, DICT } = require("quick-schema");
+const ImdbRatingSchema= DICT(Number);
 assert(Validate({
     "The Shawshank Redemption": 9.3,
     "The Godfather": 9.2,
@@ -164,7 +161,7 @@ assert(Validate({
 ```
 You can combine object schema with dictionary schema:
 ```js
-const ImdbRatingSchema2 = DICT({ dictionary_name: STR}, NUM);
+const ImdbRatingSchema2 = DICT({ dictionary_name: String}, Number);
 assert(Validate({
     "dictionary_name": "IMDB Score",
     "The Shawshank Redemption": 9.3,
@@ -179,41 +176,38 @@ assert(Validate({
 ### Logical Operators
 #### NOT
 ```js
-const { Validate, NUM, NOT } =
-        require("quick-schema");
+const { Validate, NOT } = require("quick-schema");
 let ok;
-ok = Validate("1", NOT(NUM));
+ok = Validate("1", NOT(Number));
 assert(ok);
-ok = Validate(1, NOT(NUM));
+ok = Validate(1, NOT(Number));
 assert(!ok);
 ```
 
 [Back](#table-of-content)
 #### ONE_OF
 ```js
-const { Validate, NUM, STR, ONE_OF } =
-        require("quick-schema");
+const { Validate, ONE_OF } = require("quick-schema");
 let ok;
-ok = Validate(1, ONE_OF(NUM, STR));
+ok = Validate(1, ONE_OF(Number, String));
 assert(ok);
-ok = Validate("", ONE_OF(NUM, STR));
+ok = Validate("", ONE_OF(Number, String));
 assert(ok);
-ok = Validate(true, ALL_OF(NUM, STR));
+ok = Validate(true, ALL_OF(Number, String));
 assert(!ok);
 ```
 
 [Back](#table-of-content)
 #### ALL_OF
 ```js
-const { Validate, NUM, STR, ALL_OF } =
-        require("quick-schema");
+const { Validate, ALL_OF } = require("quick-schema");
 const EmployeeSchema = {
-    name: STR,
-    title: STR
+    name: String,
+    title: String
 };
 const PersonSchema = {
-    name: STR,
-    age: NUM,
+    name: String,
+    age: Number,
 };
 assert(Validate({
    name: "Steven",
@@ -227,8 +221,7 @@ assert(Validate({
 #### ANY
 `ANY` validator will match any value.
 ```js
-const { Validate, ANY } =
-        require("quick-schema");
+const { Validate, ANY } = require("quick-schema");
 assert(Validate({},        ANY));
 assert(Validate(false,     ANY));
 assert(Validate(undefined, ANY));
@@ -242,8 +235,7 @@ assert(Validate({}, { data : ANY }));
 #### EXISTS
 `EXISTS` validator will match any value, if such property exists.
 ```js
-const { Validate, NOT, EXISTS } =
-        require("quick-schema");
+const { Validate, NOT, EXISTS } = require("quick-schema");
 const schema = {
     name: EXISTS,
     nick_name: NOT(EXISTS)
@@ -261,8 +253,7 @@ assert(!ok);  // !ok because property 'nick_name' does exist.
 #### IS
 `IS` validator matches exact value:
 ```js
-const { Validate, IS } =
-        require("quick-schema");
+const { Validate, IS } = require("quick-schema");
 let ok;
 ok = Validate(1, IS(1));
 assert(ok);
@@ -280,20 +271,18 @@ assert(ok);
 #### STRINGIFIED
 `STRINGIFIED` validator will match a string that can be `JSON.parse(...)` to a specified type:
 ```js
-const { Validate, NUM, STRINGIFIED } =
-        require("quick-schema");
-assert(Validate("1", STRINGIFIED(NUM)));
-assert(Validate('{ "name": "Maggie" }', STRINGIFIED({ name: STR })));
+const { Validate, STRINGIFIED } = require("quick-schema");
+assert(Validate("1", STRINGIFIED(Number)));
+assert(Validate('{ "name": "Maggie" }', STRINGIFIED({ name: String })));
 ```
 
 [Back](#table-of-content)
 #### OPTIONAL
 ```js
-const { Validate, STR, NUM, OPTIONAL } =
-        require("quick-schema");
+const { Validate, OPTIONAL } = require("quick-schema");
 const Schema = {
-    name: STR,
-    salary: OPTIONAL(NUM)
+    name: String,
+    salary: OPTIONAL(Number)
 };
 assert(Validate({ name: "Summer" }, Schema));   // ok because '.salary' is optional
 assert(Validate({ name: "Summer", salary: 100 }, Schema));
@@ -321,16 +310,15 @@ Validate(obj, schema, library);
 [Back](#table-of-content)
 ### Alias
 ```js
-const { Validate, STR, NUM, ALL_OF } =
-        require("quick-schema");
+const { Validate, ALL_OF } = require("quick-schema");
 const Library = {
     // Define an alias type "Person"
     "Person": {
-        name: STR,
+        name: String,
     },
     // Define an alias type "Employee"
     // Note that "Employee" type depends on "Person"
-    "Employee": ALL_OF("Person", { salary: NUM })
+    "Employee": ALL_OF("Person", { salary: Number })
 };
 const employees = [ { name: "Alice", salary: 100 },
                     { name: "Bob",   salary: 100 } ];
@@ -343,8 +331,7 @@ assert(Validate(employees, ["Employee"], Library));
 #### Self Reference
 Validator self reference can be achieved via alias:
 ```js
-const { Validate, ANY, OPTIONAL } =
-        require("quick-schema");
+const { Validate, ANY, OPTIONAL } = require("quick-schema");
 const Library = {
     "LinkedList": {
         next: OPTIONAL("LinkedList"),

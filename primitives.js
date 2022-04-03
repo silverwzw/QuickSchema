@@ -10,7 +10,7 @@ const NULL_TYPE      = new PRIMITIVE_TYPE_BASE("null");
 const UNDEFINED_TYPE = new PRIMITIVE_TYPE_BASE("undefined");
 
 function PrimitiveValidator({ target, schema }) {
-    if (schema === BOOLEAN_TYPE) {
+    if (schema === BOOLEAN_TYPE || schema === Boolean) {
         if ("boolean" !== typeof target) {
             return {
                 path: "",
@@ -20,7 +20,7 @@ function PrimitiveValidator({ target, schema }) {
         return;
     }
 
-    if (schema === NUMBER_TYPE) {
+    if (schema === NUMBER_TYPE || schema === Number) {
         if ("number" !== typeof target) {
             return {
                 path: "",
@@ -30,7 +30,7 @@ function PrimitiveValidator({ target, schema }) {
         return;
     }
 
-    if (schema === STRING_TYPE){
+    if (schema === STRING_TYPE || schema === String){
         if ("string" !== typeof target) {
             return {
                 path: "",
