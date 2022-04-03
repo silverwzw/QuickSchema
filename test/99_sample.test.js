@@ -177,6 +177,45 @@ describe("code example in README", () => {
         });
     });
 
+    describe("User defined validators", () => {
+        describe("Schema alias", () => {
+            it("default", () => {
+                const Library = {
+                    "Person": {
+                        name: STR,
+                    },
+                    "Employee": ALL_OF("Person", { salary: NUM })
+                };
+                const employees = [ { name: "Alice", salary: 100 },
+                                    { name: "Bob",   salary: 100 } ];
+                assert(Validate(employees, ["Employee"], Library));
+            });
+            it("Self reference", () => {
+                const Library = {
+                    "LinkedList": {
+                        next: OPTIONAL("LinkedList"),
+                        data: ANY
+                    }
+                };
+                const node1 = { data: 3721 };
+                const node2 = { data: 360, next: node1 };
+                assert(Validate(node2, "LinkedList", Library));
+            });
+        });
+        it("Custom validator logic", () => {
+            const Library = {
+                "PositiveNumber": (num) => {
+                    return num > 0;
+                }
+            };
+            let ok;
+            ok = Validate(1, "PositiveNumber", Library);
+            assert(ok);
+            ok = Validate(-1, "PositiveNumber", Library);
+            assert(!ok);
+        });
+    });
+
     it("Retrive error message", () => {
         const CompanySchema = {
             name: STR,

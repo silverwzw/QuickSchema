@@ -4,5 +4,27 @@
   },
   "scripts": {
     "test": "mocha"
+  },
+  "author": "Silverwzw <npm-publish@silverwzw.com>",
+  "version": "0.5.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/silverwzw/Simple-Schema-Validator.git"
+  },
+  "homepage": "https://github.com/silverwzw/Simple-Schema-Validator",
+  "keywords": [
+    "schema",
+    "validate",
+    "validator"
+  ],
+  "name": "simple_schema_validator",
+  "description": "Simple JSON Schema Validator is a javascript module that allows user to perform json object validation.",
+  "bugs": {
+    "url": "https://github.com/silverwzw/Simple-Schema-Validator/issues"
+  },
+  "main": "simple_schema_validator.js",
+  "directories": {
+    "test": "test"
   }
 }
