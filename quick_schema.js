@@ -16,6 +16,11 @@ const {
 } = require("./primitives.js");
 
 const {
+    RegexValidator,
+    IsRegexSchema
+} = require("./regex.js");
+
+const {
     ArrayValidator,
     IsArraySchema
 } = require("./array.js");
@@ -89,6 +94,7 @@ function ValidateRecursive(context) {
     }
     const types = [
         [ IsPrimitiveSchema,   PrimitiveValidator   ],
+        [ IsRegexSchema,       RegexValidator       ],
         [ IsArraySchema,       ArrayValidator       ],
         [ IsDictionarySchema,  DictionaryValidator  ],
         [ IsAllOfSchema,       AllOfValidator       ],

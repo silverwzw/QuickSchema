@@ -6,7 +6,7 @@
     "test": "mocha"
   },
   "author": "Silverwzw <npm-publish@silverwzw.com>",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "license": "MIT",
   "repository": {
     "type": "git",

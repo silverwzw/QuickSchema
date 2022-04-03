@@ -22,6 +22,7 @@ Quick Schema is a javascript module that allows user to perform json object vali
 		- [IS](#is)
 		- [STRINGIFIED](#stringified)
 		- [OPTIONAL](#optional)
+		- [Regular Expression](#regular-expression)
 - [User Defined Validators](#user-defined-validators)
 	- [Alias](#alias)
 		- [Self Reference](#self-reference)
@@ -286,6 +287,22 @@ const Schema = {
 };
 assert(Validate({ name: "Summer" }, Schema));   // ok because '.salary' is optional
 assert(Validate({ name: "Summer", salary: 100 }, Schema));
+```
+
+[Back](#table-of-content)
+#### Regular Expression
+```js
+const { Validate } = require("quick-schema");
+const Schema = {
+    name: /^Andrew Jack(son)?$/
+};
+let ok;
+ok = Validate({ name: "Andrew Jackson"}, Schema);
+assert(ok);
+ok = Validate({ name: "Andrew Jack"}, Schema);
+assert(ok);
+ok = Validate({ name: "Andy Jack" }, Schema);
+assert(!ok);
 ```
 
 [Back](#table-of-content)

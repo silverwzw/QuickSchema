@@ -174,6 +174,18 @@ describe("code example in README", () => {
                 assert(Validate({ name: "Summer" }, Schema));
                 assert(Validate({ name: "Summer", salary: 100 }, Schema));
             });
+            it("Regular Expression", () => {
+                const Schema = {
+                    name: /^Andrew Jack(son)?$/
+                };
+                let ok;
+                ok = Validate({ name: "Andrew Jackson"}, Schema);
+                assert(ok);
+                ok = Validate({ name: "Andrew Jack"}, Schema);
+                assert(ok);
+                ok = Validate({ name: "Andy Jack" }, Schema);
+                assert(!ok);
+            });
         });
     });
 
