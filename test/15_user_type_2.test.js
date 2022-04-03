@@ -2,7 +2,7 @@ const assert = require('assert');
 
 describe("UserType (alias)", () => {
     const { ONE_OF, NUM, STR, NOT, Validate } =
-        require("../simple_schema_validator.js");
+        require("../quick_schema.js");
 
     it("basic", () => {
         const user_lib = { "NotNumber": NOT(NUM) };

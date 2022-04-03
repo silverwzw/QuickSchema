@@ -2,7 +2,7 @@ const assert = require('assert');
 
 describe("ONE_OF", () => {
     const { ANY, NUM, STR, ONE_OF, NOT, BOOL, Validate } =
-        require("../simple_schema_validator.js");
+        require("../quick_schema.js");
 
     it("basic", () => {
         assert(Validate(1, ONE_OF(NUM)));

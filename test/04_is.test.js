@@ -1,7 +1,7 @@
 const assert = require('assert');
 
 describe("IS", () => {
-    const { IS, Validate } = require("../simple_schema_validator.js");
+    const { IS, Validate } = require("../quick_schema.js");
 
     it("basic", () => {
         assert(Validate(1, IS(1)));

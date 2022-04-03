@@ -2,7 +2,7 @@ const InvalidSchemaError = require("./invalid_schema_error.js");
 const { ADVANCED_TYPE_BASE } = require("./type_base.js");
 
 const symbol = {
-    value: Symbol("SimpleJsonSchema::Is::Value")
+    value: Symbol("QuickSchema::Is::Value")
 };
 
 class IS_TYPE extends ADVANCED_TYPE_BASE {

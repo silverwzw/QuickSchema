@@ -2,7 +2,7 @@ const InvalidSchemaError = require("./invalid_schema_error.js");
 const { IsTypeSchema, ADVANCED_TYPE_BASE } = require("./type_base.js");
 
 const symbol = {
-    child_schemas: Symbol("SimpleJsonSchema::AllOf::ChildSchemas")
+    child_schemas: Symbol("QuickSchema::AllOf::ChildSchemas")
 };
 
 class ALLOF_TYPE extends ADVANCED_TYPE_BASE {

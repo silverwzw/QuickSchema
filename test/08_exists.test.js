@@ -1,7 +1,7 @@
 const assert = require('assert');
 
 describe("EXISTS", () => {
-    const { EXISTS, NOT, Validate } = require("../simple_schema_validator.js");
+    const { EXISTS, NOT, Validate } = require("../quick_schema.js");
 
     it("basic", () => {
         assert(!Validate({},  { a: EXISTS }));

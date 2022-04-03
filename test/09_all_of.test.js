@@ -2,7 +2,7 @@ const assert = require('assert');
 
 describe("ALL_OF", () => {
     const { ANY, NUM, IS, ALL_OF, STR, NOT, EXISTS, BOOL, Validate } =
-        require("../simple_schema_validator.js");
+        require("../quick_schema.js");
 
     it("basic", () => {
         assert(Validate(1, ALL_OF(NUM)));

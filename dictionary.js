@@ -6,8 +6,8 @@ const { ADVANCED_TYPE_BASE,
 const { IsObjectSchema, ObjectValidator } = require("./object.js");
 
 const symbol = {
-    object_schema: Symbol("SimpleJsonSchema::Dictionary::ObjectSchema"),
-    valut_schema:  Symbol("SimpleJsonSchema::Dictionary::ValueSchema"),
+    object_schema: Symbol("QuickSchema::Dictionary::ObjectSchema"),
+    valut_schema:  Symbol("QuickSchema::Dictionary::ValueSchema"),
 };
 
 const default_object_schema = Object.freeze({});

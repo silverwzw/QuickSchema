@@ -3,7 +3,7 @@ describe("code example in README", () => {
     it("Quick start", () => {
         const assert = require('assert');
         const { Validate, STR, NUM, OPTIONAL, ONE_OF, IS } =
-                require("../simple_schema_validator.js");
+                require("../quick_schema.js");
 
         // Schema definition for "Person"
         const PersonSchema = {
@@ -30,12 +30,12 @@ describe("code example in README", () => {
     const assert = require('assert');
     const { Validate, STR, NUM, OPTIONAL, IS, DICT, NOT, ALL_OF, ONE_OF, ANY,
             EXISTS, STRINGIFIED } =
-            require("../simple_schema_validator.js");
+            require("../quick_schema.js");
 
     describe("Validators", () => {
         it("Primitive types", () => {
             const { Validate, STR, NUM, BOOL, NULL, UNDEF } =
-                        require("../simple_schema_validator.js");
+                        require("../quick_schema.js");
 
             assert(Validate("string",  STR));
             assert(Validate(true,      BOOL));

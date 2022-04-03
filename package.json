@@ -10,20 +10,22 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/silverwzw/Simple-Schema-Validator.git"
+    "url": "git+https://github.com/silverwzw/QuickSchema.git"
   },
-  "homepage": "https://github.com/silverwzw/Simple-Schema-Validator",
+  "homepage": "https://github.com/silverwzw/QuickSchema",
   "keywords": [
     "schema",
     "validate",
-    "validator"
+    "validator",
+    "validation",
+    "JSON"
   ],
-  "name": "simple_schema_validator",
-  "description": "Simple JSON Schema Validator is a javascript module that allows user to perform json object validation.",
+  "name": "quick-schema",
+  "description": "QuickSchema Validator is a javascript module that allows user to perform object validation.",
   "bugs": {
-    "url": "https://github.com/silverwzw/Simple-Schema-Validator/issues"
+    "url": "https://github.com/silverwzw/QuickSchema/issues"
   },
-  "main": "simple_schema_validator.js",
+  "main": "quick_schema.js",
   "directories": {
     "test": "test"
   }

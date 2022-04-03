@@ -1,5 +1,5 @@
 const symbol = {
-    type_name: Symbol("SimpleJsonSchema::TypeName")
+    type_name: Symbol("QuickSchema::TypeName")
 };
 
 class TYPE_BASE {

@@ -3,7 +3,7 @@ const assert = require('assert');
 describe("STRINGIFIED", () => {
     const { NUM, IS, STRINGIFIED, UNDEF, NOT, EXISTS, BOOL, STR, ANY, NULL,
             Validate } =
-        require("../simple_schema_validator.js");
+        require("../quick_schema.js");
 
     it("basic", () => {
         assert(Validate("1", STRINGIFIED(NUM)));

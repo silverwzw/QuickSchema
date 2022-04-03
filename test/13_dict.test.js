@@ -2,7 +2,7 @@ const assert = require('assert');
 
 describe("DICT", () => {
     const { NUM, STR, DICT, Validate } =
-        require("../simple_schema_validator.js");
+        require("../quick_schema.js");
 
     it("basic", () => {
         assert(Validate({}, DICT(NUM)));

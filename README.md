@@ -1,6 +1,6 @@
-# Simple Schema Validator
+# Quick Schema
 
-Simple JSON Schema Validator is a javascript module that allows user to perform json object validation.
+Quick Schema is a javascript module that allows user to perform json object validation.
 
 ## Table of Content
 - [Quick Start](#quick-start)
@@ -36,7 +36,7 @@ The minimal syntax to validate a specified `obj` against a specified `schema`:
 ### Define a schema
 ```js
 const { Validate, STR, NUM, OPTIONAL, ONE_OF, IS } =
-        require("simple-schema-validator");
+        require("quick-schema");
 
 const PersonSchema = {
   name: {
@@ -94,7 +94,7 @@ console.log(message); // Prints: 'root.employees[1].id' is not a number."
 ### Primitive types
 ```js
 const { Validate, STR, NUM, BOOL, NULL, UNDEF } =
-        require("simple-schema-validator");
+        require("quick-schema");
 
 assert(Validate("string",  STR));
 assert(Validate(true,      BOOL));
@@ -107,7 +107,7 @@ assert(Validate(undefined, UNDEF));
 ### Object
 ```js
 const { Validate, STR, NUM, OPTIONAL } =
-        require("simple-schema-validator");
+        require("quick-schema");
         
 const ContactSchema = {
     name: STR,
@@ -139,7 +139,7 @@ assert(Validate({
 ### Array
 ```js
 const { Validate, NUM } =
-        require("simple-schema-validator");
+        require("quick-schema");
 const NumberArraySchema = [NUM];
 let ok = Validate([1,1,2,3,5,8], NumberArraySchema);
 assert(ok);
@@ -152,7 +152,7 @@ assert(!ok);
 Use the `Dictionary` validator to validate a mapping (from string to another type):
 ```js
 const { Validate, NUM, STR, DICT } =
-        require("simple-schema-validator");
+        require("quick-schema");
 const ImdbRatingSchema= DICT(NUM);
 assert(Validate({
     "The Shawshank Redemption": 9.3,
@@ -180,7 +180,7 @@ assert(Validate({
 #### NOT
 ```js
 const { Validate, NUM, NOT } =
-        require("simple-schema-validator");
+        require("quick-schema");
 let ok;
 ok = Validate("1", NOT(NUM));
 assert(ok);
@@ -192,7 +192,7 @@ assert(!ok);
 #### ONE_OF
 ```js
 const { Validate, NUM, STR, ONE_OF } =
-        require("simple-schema-validator");
+        require("quick-schema");
 let ok;
 ok = Validate(1, ONE_OF(NUM, STR));
 assert(ok);
@@ -206,7 +206,7 @@ assert(!ok);
 #### ALL_OF
 ```js
 const { Validate, NUM, STR, ALL_OF } =
-        require("simple-schema-validator");
+        require("quick-schema");
 const EmployeeSchema = {
     name: STR,
     title: STR
@@ -228,7 +228,7 @@ assert(Validate({
 `ANY` validator will match any value.
 ```js
 const { Validate, ANY } =
-        require("simple-schema-validator");
+        require("quick-schema");
 assert(Validate({},        ANY));
 assert(Validate(false,     ANY));
 assert(Validate(undefined, ANY));
@@ -243,7 +243,7 @@ assert(Validate({}, { data : ANY }));
 `EXISTS` validator will match any value, if such property exists.
 ```js
 const { Validate, NOT, EXISTS } =
-        require("simple-schema-validator");
+        require("quick-schema");
 const schema = {
     name: EXISTS,
     nick_name: NOT(EXISTS)
@@ -262,7 +262,7 @@ assert(!ok);  // !ok because property 'nick_name' does exist.
 `IS` validator matches exact value:
 ```js
 const { Validate, IS } =
-        require("simple-schema-validator");
+        require("quick-schema");
 let ok;
 ok = Validate(1, IS(1));
 assert(ok);
@@ -281,7 +281,7 @@ assert(ok);
 `STRINGIFIED` validator will match a string that can be `JSON.parse(...)` to a specified type:
 ```js
 const { Validate, NUM, STRINGIFIED } =
-        require("simple-schema-validator");
+        require("quick-schema");
 assert(Validate("1", STRINGIFIED(NUM)));
 assert(Validate('{ "name": "Maggie" }', STRINGIFIED({ name: STR })));
 ```
@@ -290,7 +290,7 @@ assert(Validate('{ "name": "Maggie" }', STRINGIFIED({ name: STR })));
 #### OPTIONAL
 ```js
 const { Validate, STR, NUM, OPTIONAL } =
-        require("simple-schema-validator");
+        require("quick-schema");
 const Schema = {
     name: STR,
     salary: OPTIONAL(NUM)
@@ -322,7 +322,7 @@ Validate(obj, schema, library);
 ### Alias
 ```js
 const { Validate, STR, NUM, ALL_OF } =
-        require("simple-schema-validator");
+        require("quick-schema");
 const Library = {
     // Define an alias type "Person"
     "Person": {
@@ -344,7 +344,7 @@ assert(Validate(employees, ["Employee"], Library));
 Validator self reference can be achieved via alias:
 ```js
 const { Validate, ANY, OPTIONAL } =
-        require("simple-schema-validator");
+        require("quick-schema");
 const Library = {
     "LinkedList": {
         next: OPTIONAL("LinkedList"),

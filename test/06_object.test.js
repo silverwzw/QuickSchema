@@ -2,7 +2,7 @@ const assert = require('assert');
 
 describe("OBJECT", () => {
     const { BOOL, NUM, STR, NULL, UNDEF, ANY, EXISTS, NOT, IS, Validate }
-        = require("../simple_schema_validator.js");
+        = require("../quick_schema.js");
 
     it("basic", () => {
         assert(Validate({ },  { }));

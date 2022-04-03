@@ -2,7 +2,7 @@ const assert = require('assert');
 
 describe("UserType (function)", () => {
     const { IS, BOOL, ALL_OF, ONE_OF, NOT, NUM, Validate } =
-        require("../simple_schema_validator.js");
+        require("../quick_schema.js");
 
     it("Basic", () => {
         const user_lib = { "AlwaysTrue": () => true };
